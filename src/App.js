@@ -2,7 +2,7 @@ import React from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-import SearchBar from './components/search'
+import SearchBar from './components/SearchBar'
 
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
@@ -27,12 +27,12 @@ function App() {
         </a>
       </header> */}
       <SearchBox
-          placeholder="Search"
-          onSearch={newValue => console.log('value is ' + newValue)}
-          onFocus={() => console.log('onFocus called')}
-          onBlur={() => console.log('onBlur called')}
-          onChange={() => console.log('onChange called')}
-        />
+        placeholder="Search"
+        onSearch={newValue => console.log('value is ' + newValue)}
+        onFocus={() => console.log('onFocus called')}
+        onBlur={() => console.log('onBlur called')}
+        onChange={() => console.log('onChange called')}
+      />
       <PrimaryButton>I am a button.</PrimaryButton>
     </div>
   );
