@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
+import { Modal } from 'office-ui-fabric-react';
+import data from '../CS_res.json'
 
 class CourseDetail extends Component {
   constructor(props) {
     super(props);
+  }
 
-    this.state = {
+  getCourseCode = (id) => {
+    for (let item in data) {
+      if (data[item]["course_id"] == 12886) {
+        return data[item]["code"]
+      }
+    }
+  }
 
-    };
+  getCourseTitle = (id) => {
+    for (let item in data) {
+      if (data[item]["course_id"] == 12886) {
+        return data[item]["name"]
+      }
+    }
+  }
+
+  getCourseDesc = (id) => {
+    for (let item in data) {
+      if (data[item]["course_id"] == 12886) {
+        return data[item]["description"]
+      }
+    }
+  }
+
+  _close = () => {
+    this.props.toggleOpen()
   }
 
   render() {
-
     return (
-      <div style={{ ...cardContainerStyle }}>
-        <h3 style={{ ...cardTextStyle }}>{this.props.courseCode}</h3>
-        <h5 style={{ ...cardTextStyle }}>{this.props.courseTitle}</h5>
-      </div>
+      <Modal isOpen={this.props.isOpen} onDismiss={this._close} class="modal">
+        <div style={{ ...cardContainerStyle }}>
+          <h3 style={{ ...cardTextStyle }}>{this.getCourseCode(this.props.courseId)}</h3>
+          <h5 style={{ ...cardTextStyle }}>{this.getCourseTitle(this.props.courseId)}</h5>
+          <p style={{ ...cardTextStyle }}>{this.getCourseDesc(this.props.courseId)}</p>
+        </div>
+      </Modal >
     )
   }
 }
