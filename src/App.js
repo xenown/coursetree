@@ -65,9 +65,9 @@ class App extends Component {
   addCourse = (code) => {
     let avail = data[code]['offered']
     let addedCourse = false;
-    for (let i in avail){
+    for (let i in avail) {
       let indexOffset;
-      switch (avail[i]){
+      switch (avail[i]) {
         case "F":
           indexOffset = 0;
           break;
@@ -80,11 +80,11 @@ class App extends Component {
         default:
           alert("Unable to add.")
           return
-      } 
-      for (let i = 0; i < Object.keys(this.state.coursesChosen).length; i+=3){
+      }
+      for (let i = 0; i < Object.keys(this.state.coursesChosen).length; i += 3) {
         console.log(parseInt(i) + parseInt(indexOffset))
-        let index = parseInt(i) + parseInt(indexOffset) + 1; 
-        if (this.state.coursesChosen[index.toString()].length <= 5){
+        let index = parseInt(i) + parseInt(indexOffset) + 1;
+        if (this.state.coursesChosen[index.toString()].length <= 5) {
           let bigTemp = this.state.coursesChosen;
           let temp = bigTemp[index.toString()];
           temp.push(data[this.state.selectedCourseCode]);
@@ -98,7 +98,7 @@ class App extends Component {
       }
       if (addedCourse) { break }
     }
-    if (!addedCourse){
+    if (!addedCourse) {
       alert("Unable to add.")
       return
     }
@@ -113,13 +113,8 @@ class App extends Component {
 
   courseExists = (code) => {
     let ret = false;
-<<<<<<< HEAD
     for (let c in this.state.coursesTaken) {
-      if (this.state.coursesTaken[c] === this.state.selectedCourseCode) {
-=======
-    for (let c in this.state.coursesTaken){
-      if (this.state.coursesTaken[c] == code){
->>>>>>> 8e314ed82cb6f01004754e33d50faa52ce71b38a
+      if (this.state.coursesTaken[c] === code) {
         ret = true;
         break;
       }
