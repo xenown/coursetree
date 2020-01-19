@@ -32,7 +32,7 @@ class CourseOrgChart extends Component {
 
   CourseNode = ({ node }) => {
     return (
-      <div className="card course-node" >
+      <div className="card course-node" style={{"box-shadow": "0px 0px 10px " + this.getColor(node[this.props.filter])}}>
         <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}>
           <div className="course-node-name">{node.code}</div>
           <div className="course-node-flag">
@@ -51,9 +51,14 @@ class CourseOrgChart extends Component {
         <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.id)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.collapse(node.nodeIndex, this.state.courseTree, this.state.courseTreeCollapse)} > Prereqs ({node.prereq.length}) </div>
       </div>
-
     );
   };
+
+  getColor(value){
+    //value from 0 to 1
+    var hue=((1-value)*120).toString(10);
+    return ["hsl(",hue,",100%,50%)"].join("");
+  }
 
   collapse(index, treeRoot, collapseRoot) {
       console.log("Collapse")  
