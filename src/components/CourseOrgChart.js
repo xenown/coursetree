@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import data from '../CS_res.json'
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
-import { json } from 'd3';
+import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
+import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 
 class CourseOrgChart extends Component {
   constructor(props){
