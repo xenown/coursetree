@@ -58,14 +58,14 @@ class CourseDetail extends Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.isOpen} onDismiss={this._close} class="modal">
-        <div class="details-main-container row">
-          <div class="details-container col-9">
-            <h3 class="details-title">{this.getCode(this.props.courseId)}</h3>
-            <h5 class="details-title">{this.getTitle(this.props.courseId)}</h5>
-            <p class="details-body modal-body">{this.getDesc(this.props.courseId)}</p>
+      <Modal isOpen={this.props.isOpen} onDismiss={this._close} className="modal">
+        <div className="details-main-container row">
+          <div className="details-container col-9">
+            <h3 className="details-title">{this.getCode(this.props.courseId)}</h3>
+            <h5 className="details-title">{this.getTitle(this.props.courseId)}</h5>
+            <p className="details-body modal-body">{this.getDesc(this.props.courseId)}</p>
           </div>
-          <div class="details-column col-3">
+          <div className="details-column col-3">
             <dl>
               <dt>Offered:</dt>
               <dd>{this.getOffered(this.props.courseId)}</dd>
