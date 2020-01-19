@@ -24,7 +24,7 @@ class App extends Component {
       coursesTaken: [],
       coursesChosen: 
       {
-        1: [data['CS 100']],
+        1: [],
         2: [],
         3: [],
         4: [],
