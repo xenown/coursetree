@@ -66,7 +66,7 @@ class Schedule extends Component {
   }
 
   generateTerm = (num) => {
-    switch(num % 3){
+    switch (num % 3) {
       case 0:
         return "Spring"
       case 1:
@@ -86,11 +86,14 @@ class Schedule extends Component {
             {
               Object.keys(this.props.coursesChosen).map((key, index) => {
                 return (<dl className="ScheduleRow" key={index}>
-                  {this.props.coursesChosen[key].map((course, index) => {
-                    return (<div className="card CourseLabel card-header schedule-course-node-title" key={index}>
-                      {course.code}
-                    </div>)
-                  })}
+                  {this.props.coursesChosen[key].length > 0 ?
+                    this.props.coursesChosen[key].map((course, index) => {
+                      return (<div className="card CourseLabel card-header schedule-course-node-title" key={index}>
+                        {course.code}
+                      </div>)
+                    }) : <div className="card CourseLabel card-header schedule-course-node-title hidden" key={index}>
+                      {"placeholder"}
+                    </div>}
                   <hr />
                 </dl>)
               })
