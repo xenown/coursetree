@@ -113,13 +113,8 @@ class App extends Component {
 
   courseExists = (code) => {
     let ret = false;
-<<<<<<< HEAD
-    for (let c in this.state.coursesTaken) {
-      if (this.state.coursesTaken[c] === this.state.selectedCourseCode) {
-=======
     for (let c in this.state.coursesTaken){
       if (this.state.coursesTaken[c] == code){
->>>>>>> 8e314ed82cb6f01004754e33d50faa52ce71b38a
         ret = true;
         break;
       }
