@@ -7,7 +7,7 @@ import data from '../CS_res.json';
 
 
 const theme = getTheme();
-const { palette, semanticColors, fonts } = theme;
+const { palette, fonts } = theme;
 
 class SearchBar extends Component {
   constructor(props) {

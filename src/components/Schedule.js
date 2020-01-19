@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { Panel } from 'office-ui-fabric-react';
+import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import data from '../CS_res.json'
 
 class Schedule extends Component {
+
+  courseClass = mergeStyles({
+    fontSize: 15,
+    height: 10,
+    width: 10,
+    
+  });
+
   getCode = (id) => {
     for (let item in data) {
       if (data[item]["id"] === id) {
@@ -61,22 +70,25 @@ class Schedule extends Component {
       <Panel isOpen={this.props.isOpen} onDismiss={this._close} class="panel">
         <div className="details-main-container row">
           <div className="details-container col-9">
-            <dl>
-              {
-                Object.keys(this.props.coursesChosen).map((key) => {
-                  this.props.coursesChosen[key].map((course) => {
-                    return (<div className="card">
+
+            {
+              Object.keys(this.props.coursesChosen).map((key, index) => {
+                return (<dl key={index}>
+                  {this.props.coursesChosen[key].map((course, index) => {
+                    return (<div className="card-title" key={index}>
                       {course.code}
                     </div>)
-                  });
-                })}
-              {/* <dt>Prereqs:</dt>
+                  })}
+                </dl>)
+              })
+            }
+            {/* <dt>Prereqs:</dt>
               <dd>{this.getPrereqs(12766)}</dd>
               <hr />
               <dt>Antireqs:</dt>
               <dd>{this.getAntireqs(12766)}</dd>
               <hr /> */}
-            </dl>
+
             {/* <h3 className="details-title">{this.getCode(12766)}</h3>
             <h5 className="details-title">{this.getTitle(12766)}</h5>
             <p className="details-body modal-body">{this.getDesc(12766)}</p> */}

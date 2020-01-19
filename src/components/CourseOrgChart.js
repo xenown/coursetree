@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import data from '../CS_res.json'
+import data from '../res.json'
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
 import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
@@ -33,22 +33,26 @@ class CourseOrgChart extends Component {
   CourseNode = ({ node }) => {
     return (
       <div className="card course-node" >
-        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}>
+        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
           <div className="course-node-name">{node.code}</div>
           <div className="course-node-flag">
-            {node.offered.map((term) => {
+            {node.offered.map((term, index) => {
               switch (term) {
                 case "F":
-                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
+                  return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
                 case "W":
-                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
+                  return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
                 case "S":
-                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
+                  return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
+                default:
+                  break;
               }
-            })}
+              return <div/>
+            }
+            )}
           </div>
         </div>
-        <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.id)}> {node.name} </div>
+        <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.code)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.collapse(node.nodeIndex, this.state.courseTree, this.state.courseTreeCollapse)} > Prereqs ({node.prereq.length}) </div>
       </div>
 
@@ -57,8 +61,8 @@ class CourseOrgChart extends Component {
 
   collapse(index, treeRoot, collapseRoot) {
       console.log("Collapse")  
-      if (treeRoot.nodeIndex == index) {
-        if (collapseRoot.children.length != 0) {
+      if (treeRoot.nodeIndex === index) {
+        if (collapseRoot.children.length !== 0) {
           collapseRoot.children = []
           console.log("Hide children")
         } else {
@@ -82,8 +86,9 @@ class CourseOrgChart extends Component {
   }
 
   buildTree(coursename) {
-    let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
-    let rootNode = JSON.parse(JSON.stringify(tempData[0]))
+    // let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
+    // let tempData = JSON.parse(JSON.stringify());
+    let rootNode = JSON.parse(JSON.stringify(data[coursename]))
     rootNode.nodeIndex = this.state.nodeTotal++
     if (rootNode) {
       for (let childCourse of rootNode.prereq) {
@@ -111,7 +116,7 @@ class CourseOrgChart extends Component {
   render() {
     console.log("Rendering")
     //console.log(this.state.root + " " + this.props.rootNode)
-    if (this.state.root != this.props.courseRoot) { this.init() }
+    if (this.state.root !== this.props.courseRoot) { this.init() }
 
     return (
       <div className="course-org-chart card">

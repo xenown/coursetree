@@ -20,7 +20,8 @@ class App extends Component {
       isCourseOpen: false,
       isScheduleOpen: false,
       treeBaseCourse: null,
-      selectedCourseId: null,
+      selectedCourseCode: null,
+      coursesTaken: [],
       coursesChosen: 
       {
         1: [data[0]],
@@ -42,9 +43,9 @@ class App extends Component {
     }
   }
 
-  handleCourseClick = (id) => {
-    console.log(id)
-    this.setState({ isCourseOpen: !this.state.isCourseOpen, selectedCourseId: id });
+  handleCourseClick = (code) => {
+    console.log(code)
+    this.setState({ isCourseOpen: !this.state.isCourseOpen, selectedCourseCode: code });
   }
 
   toggleCourse = () => {
@@ -61,6 +62,26 @@ class App extends Component {
     })
   }
 
+  addCourse = () => {
+    let temp = this.state.coursesTaken;
+    temp.push(this.state.selectedCourseCode);
+    this.setState({ 
+      isCourseOpen: !this.state.isCourseOpen,
+      coursesTaken: temp
+    });
+  }
+
+  courseExists = () => {
+    let ret = false;
+    for (let c in this.state.coursesTaken){
+      if (this.state.coursesTaken[c] == this.state.selectedCourseCode){
+        ret = true;
+        break;
+      }
+    }
+    return ret;
+  }
+
   render() {
     return (
       <div className="App">
@@ -68,7 +89,8 @@ class App extends Component {
           <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
         </header>
         <div className="tree">
-          <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse} />
+          <CourseDetail courseCode={this.state.selectedCourseCode} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse} 
+          addCourse={this.addCourse} courseAdded={this.courseExists}/>
           {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
 
           <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen}/>
