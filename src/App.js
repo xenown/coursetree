@@ -19,8 +19,6 @@ class App extends Component {
     }
   }
 
-
-
   handleCourseClick = (id) => {
     this.setState({ isModalOpen: !this.state.isModalOpen, selectedCourseId: 12886 });
     console.log(id)
@@ -39,6 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          CourseTree
           <SearchBar />
         </header>
         <PrimaryButton onClick={this.handleCourseClick}>012886</PrimaryButton>
