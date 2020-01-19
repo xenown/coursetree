@@ -5,7 +5,6 @@ import CourseDetail from './components/CourseDetail'
 import CourseOrgChart from './components/CourseOrgChart'
 
 import { initializeIcons } from '@uifabric/icons';
-import { PrimaryButton, thProperties } from 'office-ui-fabric-react';
 
 initializeIcons();
 
@@ -48,13 +47,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header flex-container">
+        <header className="App-header">
           <div className="Title">CourseTree</div>
           <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse}/>
         </header>
         <div className="tree">
           <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen} toggleOpen={this.toggleOpen} />
-          {this.state.treeBaseCourse == null ? <div/> : <CourseOrgChart courseRoot="CS 241" handleClick={this.handleCourseClick} />}
+          {this.state.treeBaseCourse == null ? <div/> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
         </div>
       </div >
     );

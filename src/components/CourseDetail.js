@@ -4,10 +4,6 @@ import { Modal } from 'office-ui-fabric-react';
 import data from '../CS_res.json'
 
 class CourseDetail extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   getCourseCode = (id) => {
     for (let item in data) {
       if (data[item]["id"] === id) {
