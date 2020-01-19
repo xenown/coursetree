@@ -39,7 +39,7 @@ class SearchBar extends Component {
       marginTop: "1vh",
       backgroundColor: "white",
       overflow: 'auto',
-      marginLeft: '15vh',
+      marginLeft: '33vh',
       marginRight: '1vh',
       width: '90%',
       zIndex: 1,
