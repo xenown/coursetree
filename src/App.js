@@ -8,7 +8,7 @@ import CourseOrgChart from './components/CourseOrgChart'
 import { initializeIcons } from '@uifabric/icons';
 import { DefaultButton } from 'office-ui-fabric-react';
 
-import data from './CS_res.json';
+import data from './res.json';
 
 initializeIcons();
 
@@ -24,7 +24,7 @@ class App extends Component {
       coursesTaken: [],
       coursesChosen:
       {
-        1: [data[0]],
+        1: [data['CS 100']],
         2: [],
         3: [],
         4: [],
@@ -62,7 +62,47 @@ class App extends Component {
     })
   }
 
-  addCourse = () => {
+  addCourse = (code) => {
+    let avail = data[code]['offered']
+    let addedCourse = false;
+    for (let i in avail){
+      let indexOffset;
+      switch (avail[i]){
+        case "F":
+          indexOffset = 0;
+          break;
+        case "W":
+          indexOffset = 1;
+          break;
+        case "S":
+          indexOffset = 2;
+          break;
+        default:
+          alert("Unable to add.")
+          return
+      } 
+      for (let i = 0; i < Object.keys(this.state.coursesChosen).length; i+=3){
+        console.log(parseInt(i) + parseInt(indexOffset))
+        let index = parseInt(i) + parseInt(indexOffset) + 1; 
+        if (this.state.coursesChosen[index.toString()].length <= 5){
+          let bigTemp = this.state.coursesChosen;
+          let temp = bigTemp[index.toString()];
+          temp.push(data[this.state.selectedCourseCode]);
+          bigTemp[index.toString()] = temp;
+          addedCourse = true;
+          this.setState({
+            coursesChosen: bigTemp
+          })
+          break
+        }
+      }
+      if (addedCourse) { break }
+    }
+    if (!addedCourse){
+      alert("Unable to add.")
+      return
+    }
+
     let temp = this.state.coursesTaken;
     temp.push(this.state.selectedCourseCode);
     this.setState({
@@ -71,10 +111,15 @@ class App extends Component {
     });
   }
 
-  courseExists = () => {
+  courseExists = (code) => {
     let ret = false;
+<<<<<<< HEAD
     for (let c in this.state.coursesTaken) {
       if (this.state.coursesTaken[c] === this.state.selectedCourseCode) {
+=======
+    for (let c in this.state.coursesTaken){
+      if (this.state.coursesTaken[c] == code){
+>>>>>>> 8e314ed82cb6f01004754e33d50faa52ce71b38a
         ret = true;
         break;
       }

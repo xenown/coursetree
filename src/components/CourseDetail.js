@@ -49,11 +49,11 @@ class CourseDetail extends Component {
   }
 
   addCourse = () => {
-    this.props.addCourse()
+    this.props.addCourse(this.props.courseCode)
   }
 
   getDisabled = () => {
-    return this.props.courseAdded()
+    return this.props.courseAdded(this.props.courseCode)
   }
 
   render() {
