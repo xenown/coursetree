@@ -10,7 +10,7 @@ class Schedule extends Component {
     fontSize: 15,
     height: 10,
     width: 10,
-    
+
   });
 
   getCode = (id) => {
@@ -65,45 +65,48 @@ class Schedule extends Component {
     this.props.toggleOpen()
   }
 
+  generateTerm = (num) => {
+    switch(num % 3){
+      case 0:
+        return "Spring"
+      case 1:
+        return "Fall"
+      case 2:
+        return "Winter"
+      default:
+        return ""
+    }
+  }
+
   render() {
     return (
       <Panel isOpen={this.props.isOpen} onDismiss={this._close} class="panel">
         <div className="details-main-container row">
-          <div className="details-container col-9">
-
+          <div className="schedule-details-column col-9">
             {
               Object.keys(this.props.coursesChosen).map((key, index) => {
-                return (<dl key={index}>
+                return (<dl className="ScheduleRow" key={index}>
                   {this.props.coursesChosen[key].map((course, index) => {
-                    return (<div className="card-title" key={index}>
+                    return (<div className="card CourseLabel card-header schedule-course-node-title" key={index}>
                       {course.code}
                     </div>)
                   })}
+                  <hr />
                 </dl>)
               })
             }
-            {/* <dt>Prereqs:</dt>
-              <dd>{this.getPrereqs(12766)}</dd>
-              <hr />
-              <dt>Antireqs:</dt>
-              <dd>{this.getAntireqs(12766)}</dd>
-              <hr /> */}
-
-            {/* <h3 className="details-title">{this.getCode(12766)}</h3>
-            <h5 className="details-title">{this.getTitle(12766)}</h5>
-            <p className="details-body modal-body">{this.getDesc(12766)}</p> */}
           </div>
-          <div className="details-column col-3">
-            <dl>
-              <dt>Offered:</dt>
-              <dd>{this.getOffered(12766)}</dd>
-              <hr />
-              <dt>Prereqs:</dt>
-              <dd>{this.getPrereqs(12766)}</dd>
-              <hr />
-              <dt>Antireqs:</dt>
-              <dd>{this.getAntireqs(12766)}</dd>
-            </dl>
+          <div className="schedule-details-column col-3">
+            {
+              Object.keys(this.props.coursesChosen).map((key, index) => {
+                return (<dl className="ScheduleRow" key={index}>
+                  <div className="card CourseLabel card-header schedule-course-node-title" key={index}>
+                    {this.generateTerm(parseInt(key))}
+                  </div>
+                  <hr />
+                </dl>)
+              })
+            }
           </div>
         </div>
       </Panel >

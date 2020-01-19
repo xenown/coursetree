@@ -33,7 +33,7 @@ class CourseOrgChart extends Component {
   CourseNode = ({ node }) => {
     return (
       <div className="card course-node" >
-        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
+        <div className="card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
           <div className="course-node-name">{node.code}</div>
           <div className="course-node-flag">
             {
