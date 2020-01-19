@@ -1,3 +1,7 @@
+.App {
+	height: 100vh;
+}
+
 .App-header {
 	/* background-color: white;	   */
 	margin: 0 auto;
@@ -16,12 +20,15 @@
 .Title {
 	float: left;
 	font-weight: bold;
+	font-style: italic;
+	font-size: 1.3rem;
 	margin-right: 1vw;
 }
 
 .tree {
 	text-align: center;
 	z-index: 0;
+	height: 100%;
 }
 
 .ScheduleRow {
@@ -80,6 +87,7 @@
 }
 
 .course-org-chart {
+	height: 100%;
 	overflow: auto;
 	margin: 0 auto;
 	background-color: transparent;
@@ -134,6 +142,11 @@
 
 .hidden {
 	visibility: hidden;
+}
+
+.toggle-button {
+	float: left;
+	margin-right: 15px;
 }
 
 .filters-button {

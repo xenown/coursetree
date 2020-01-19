@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import data from '../res.json'
+import data from '../res2.json'
 import data2 from '../CS_res.json'
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
@@ -15,6 +15,7 @@ class CourseOrgChart extends Component {
       root: "",
       courseTree: {},
       courseTreeCollapse: {},
+      isFuture: false,
     }
   }
 
@@ -32,12 +33,11 @@ class CourseOrgChart extends Component {
   });
 
   CourseNode = ({ node }) => {
-    console.log(node["difficulty"])
     return (
-      <div className="card course-node" style={{"box-shadow": "0px 0px 10px " + this.getColor(node[this.props.filter])}}>
+      <div className="card course-node" style={{ "box-shadow": "0px 0px 10px " + this.getColor(node[this.props.filter]) }}>
         <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
-          <div className="course-node-name">{node.code}</div> {node.difficulty}
-          <div className="course-node-flag"> 
+          <div className="course-node-name">{node.code}</div>
+          <div className="course-node-flag">
             {
               node.offered.map((term, index) => {
                 switch (term) {
@@ -55,15 +55,17 @@ class CourseOrgChart extends Component {
           </div>
         </div>
         <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.code)}> {node.name} </div>
-        <div className="expand-children card-footer" onClick={() => this.collapse(node.nodeIndex, this.state.courseTree, this.state.courseTreeCollapse)} > Prereqs ({node.prereq.length}) </div>
+        <div className="expand-children card-footer" onClick={() => this.collapse(node.nodeIndex, this.state.courseTree, this.state.courseTreeCollapse)} >
+          {this.props.isFuture ? "Expand (" + node.opportunities.length + ")" : "Prereqs (" + node.prereq.length + ")"}
+        </div>
       </div>
     );
   };
 
-  getColor(value){
+  getColor(value) {
     //value from 0 to 1
-    var hue=((1-value)*120).toString(10);
-    return ["hsl(",hue,",100%,50%)"].join("");
+    var hue = ((1 - value) * 120).toString(10);
+    return ["hsl(", hue, ",100%,50%)"].join("");
   }
 
   collapse(index, treeRoot, collapseRoot) {
@@ -110,6 +112,26 @@ class CourseOrgChart extends Component {
     return rootNode
   }
 
+  buildFutureTree(coursename) {
+    // let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
+    // let tempData = JSON.parse(JSON.stringify());
+    console.log("future")
+    let rootNode = JSON.parse(JSON.stringify(data[coursename]))
+    rootNode["nodeIndex"] = this.nodeTotal++
+    rootNode["difficulty"] = this.getFilter("difficulty", coursename)
+    rootNode["useful"] = this.getFilter("useful", coursename)
+    rootNode["enjoyment"] = this.getFilter("enjoyment", coursename)
+    if (rootNode) {
+      for (let childCourse of rootNode.opportunities) {
+        let childTree = JSON.parse(JSON.stringify(this.buildFutureTree(childCourse)))
+        if (childTree) {
+          rootNode.children.push(childTree)
+        }
+      }
+    }
+    return rootNode
+  }
+
   getFilter = (filter, code) => {
     for (let item in data2) {
       if (data2[item]["code"] === code) {
@@ -122,19 +144,24 @@ class CourseOrgChart extends Component {
     console.log("Initialize")
 
     this.state.nodeTotal = 0
-    this.state.courseTree = this.buildTree(this.props.courseRoot)
+    this.state.courseTree = this.props.isFuture ?
+      this.buildFutureTree(this.props.courseRoot) :
+      this.buildTree(this.props.courseRoot)
     this.state.courseTreeCollapse = JSON.parse(JSON.stringify(this.state.courseTree))
     for (let childCourse of this.state.courseTreeCollapse.children) {
       childCourse.children = []
     }
-    this.setState({ root: this.props.courseRoot })
+    this.setState({
+      root: this.props.courseRoot,
+      isFuture: this.props.isFuture
+    })
   }
 
   render() {
     console.log("Rendering")
     console.log(this.props.filter)
     //console.log(this.state.root + " " + this.props.rootNode)
-    if (this.state.root !== this.props.courseRoot) { this.init() }
+    if (this.state.root !== this.props.courseRoot || this.state.isFuture !== this.props.isFuture) { this.init() }
 
     return (
       <div className="course-org-chart card">

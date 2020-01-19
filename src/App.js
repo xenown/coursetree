@@ -21,6 +21,7 @@ class App extends Component {
       isCourseOpen: false,
       isScheduleOpen: false,
       isFiltersOpen: false,
+      isFuture: false,
       filter: "difficulty",
       treeBaseCourse: null,
       selectedCourseCode: null,
@@ -61,6 +62,10 @@ class App extends Component {
 
   toggleFilters = () => {
     this.setState({ isFiltersOpen: !this.state.isFiltersOpen });
+  }
+
+  toggleFuture = () => {
+    this.setState({ isFuture: !this.state.isFuture });
   }
 
   changeFilter = (newFilter) => {
@@ -138,12 +143,14 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
+          <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} toggleFuture={this.toggleFuture} isFuture={this.state.isFuture} />
         </header>
         <div className="tree">
           <CourseDetail courseCode={this.state.selectedCourseCode} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse}
             addCourse={this.addCourse} courseAdded={this.courseExists} />
-          {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} filter={this.state.filter} />}
+          {this.state.treeBaseCourse == null ?
+            <div /> :
+            <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} filter={this.state.filter} isFuture={this.state.isFuture} />}
 
           <Filters isOpen={this.state.isFiltersOpen} toggleOpen={this.toggleFilters} handleFilter={this.changeFilter} filter={this.state.filter} />
           <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen} />

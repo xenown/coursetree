@@ -4,6 +4,7 @@ import { FocusZone } from 'office-ui-fabric-react/lib/FocusZone';
 import { List } from 'office-ui-fabric-react/lib/List';
 import { mergeStyleSets, getTheme, getFocusStyle } from 'office-ui-fabric-react/lib/Styling';
 import data from '../CS_res.json';
+import { PrimaryButton } from 'office-ui-fabric-react';
 
 
 const theme = getTheme();
@@ -122,6 +123,9 @@ class SearchBar extends Component {
         <FocusZone>
           <div className="SearchBox">
             <div className="Title">CourseTree</div>
+            <PrimaryButton className="toggle-button" onClick={() => this.props.toggleFuture()}>
+              {!this.props.isFuture ? "View Future Courses" : "View Prerequisites"}
+            </PrimaryButton>
             <SearchBox
               placeholder="Search for Courses!"
               onFocus={this.filter}
