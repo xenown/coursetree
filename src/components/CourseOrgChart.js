@@ -13,7 +13,7 @@ class CourseOrgChart extends Component {
   }
   CourseNode = ({ node }) => {
     return (
-      <div class="card course-node" onClick={() => this.props.handleClick(node.id)}>
+      <div class="card course-node" onClick={() => this.props.handleClick(node.id)}> {node.nodeIndex}
         <div class="card-header card-header course-node-title"> {node.code} </div>
         <div class="card-body course-node-body"> {node.name} </div>
         <div class="expand-children card-footer" onClick={() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
@@ -23,20 +23,21 @@ class CourseOrgChart extends Component {
   };
   buildTree(coursename) {
     console.log("Building Tree")
-    let tempData = data.filter(course => course.code === coursename)
-    let rootNode = tempData[0];
-    if (rootNode && rootNode.children.length === 0) {
+    let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
+    let rootNode = JSON.parse(JSON.stringify(tempData[0]))
+    rootNode.nodeIndex = this.state.nodeTotal++
+    if (rootNode) {
       for (let childCourse of rootNode.prereq) {
-        let childTree = this.buildTree(childCourse)
+        let childTree = JSON.parse(JSON.stringify(this.buildTree(childCourse)))
         if (childTree) {
           rootNode.children.push(childTree)
         }
       }
     }
-    console.log(rootNode)
     return rootNode
   }
   render() {
+    this.state.nodeTotal = 0
     let courseTree = this.buildTree(this.props.courseRoot)
     return (
       <div class="course-org-chart card">

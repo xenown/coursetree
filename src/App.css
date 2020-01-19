@@ -32,11 +32,13 @@
 }
 
 .course-node-body {
+  font-size: 0.9rem;
 	padding-top: 0.2rem;
 	padding-bottom: 0.2rem;
 }
 
 .course-org-chart {
+  overflow: auto;
 	margin: 0 auto;
 }
 
