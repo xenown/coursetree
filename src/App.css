@@ -1,28 +1,36 @@
 .App {
-	background-color: white;
+	background-color: #f3f2f1;
 }
 
 .App-header {
-  	background-color: white;
   	margin: 0 auto;
   	font-size: calc(4px + 2vmin);
 	color: black;
-	padding: 10px;  
 	align-items: stretch;
+	/* box-shadow: 0 0 7px 1px #141414;
+	margin-bottom: 2rem; */
+}
+
+.SearchBox {
+	background-color: rgb(230, 213, 119);
+	padding: 10px;  
 }
 
 .Title {
 	float: left;
+	margin-right: 1vw;
 }
 
 .tree {
 	text-align: center;
+	z-index: 0;
 }
 
 .course-node {
 	margin: 0.5rem;
 	width: 150px;
 	display: inline-block;
+	z-index: 0;
 }
 
 .course-node-title {

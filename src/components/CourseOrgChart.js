@@ -16,7 +16,8 @@ class CourseOrgChart extends Component {
     );
   };
   buildTree(coursename) {
-    console.log("Building Tree")
+    console.log("Building Tree");
+    console.log(coursename);
     let tempData = data.filter(course => course.code === coursename)
     let rootNode = tempData[0];
     if (rootNode && rootNode.children.length === 0) {
