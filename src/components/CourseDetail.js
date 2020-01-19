@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { Modal } from 'office-ui-fabric-react';
 import data from '../CS_res.json'
 
@@ -38,26 +39,14 @@ class CourseDetail extends Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen} onDismiss={this._close} class="modal">
-        <div style={{ ...cardContainerStyle }}>
-          <h3 style={{ ...cardTextStyle }}>{this.getCourseCode(this.props.courseId)}</h3>
-          <h5 style={{ ...cardTextStyle }}>{this.getCourseTitle(this.props.courseId)}</h5>
-          <p style={{ ...cardTextStyle }}>{this.getCourseDesc(this.props.courseId)}</p>
+        <div class="details-container">
+          <h3 class="details-text">{this.getCourseCode(this.props.courseId)}</h3>
+          <h5 class="details-text">{this.getCourseTitle(this.props.courseId)}</h5>
+          <p class="details-text">{this.getCourseDesc(this.props.courseId)}</p>
         </div>
       </Modal >
     )
   }
-}
-
-const cardContainerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  alignContent: 'center',
-  padding: '5px 10px',
-}
-
-const cardTextStyle = {
-  textAlign: 'center',
 }
 
 export default CourseDetail;
