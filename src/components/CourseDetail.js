@@ -77,7 +77,6 @@ class CourseDetail extends Component {
               <dd>{this.getAntireqs(this.props.courseId)}</dd>
             </dl>
           </div>
-
         </div>
       </Modal >
     )

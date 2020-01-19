@@ -5,7 +5,7 @@ import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
 
 class CourseOrgChart extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       nodeTotal: 0
