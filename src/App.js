@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar'
 import CourseDetail from './components/CourseDetail'
+import Schedule from './components/Schedule'
 import CourseOrgChart from './components/CourseOrgChart'
 
 import { initializeIcons } from '@uifabric/icons';
+import { DefaultButton } from 'office-ui-fabric-react';
+
+import data from './CS_res.json';
 
 initializeIcons();
 
@@ -13,34 +17,47 @@ class App extends Component {
     super(props)
 
     this.state = {
-      isModalOpen: false,
+      isCourseOpen: false,
+      isScheduleOpen: false,
       treeBaseCourse: null,
       selectedCourseId: null,
+      coursesChosen: 
+      {
+        1: [data[0]],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+        11: [],
+        12: [],
+        13: [],
+        14: [],
+        15: []
+      }
     }
   }
 
   handleCourseClick = (id) => {
     console.log(id)
-    this.setState({ isModalOpen: !this.state.isModalOpen, selectedCourseId: id });
+    this.setState({ isCourseOpen: !this.state.isCourseOpen, selectedCourseId: id });
   }
 
-  getOpenState = () => {
-    return this.state.isModalOpen;
+  toggleCourse = () => {
+    this.setState({ isCourseOpen: !this.state.isCourseOpen });
   }
 
-  toggleOpen = () => {
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+  toggleSchedule = () => {
+    this.setState({ isScheduleOpen: !this.state.isScheduleOpen });
   }
 
-  updateTreeBaseCourse = (course_id) => {
+  updateTreeBaseCourse = (coursename) => {
     this.setState({
-      treeBaseCourse: course_id
-    })
-  }
-
-  updateTreeBaseCourse = (course_id) => {
-    this.setState({
-      treeBaseCourse: course_id
+      treeBaseCourse: coursename
     })
   }
 
@@ -48,13 +65,15 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div className="Title">CourseTree</div>
           <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
         </header>
         <div className="tree">
-          <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen} toggleOpen={this.toggleOpen} />
+          <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse} />
           {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
+
+          <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen}/>
         </div>
+        <DefaultButton className="schedule-button" onClick={() => this.toggleSchedule()}>Schedule</DefaultButton>
       </div >
     );
   }

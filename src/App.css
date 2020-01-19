@@ -1,45 +1,68 @@
 .App {
-	background-color: white;
+	/* background-color: #black; */
 }
 
 .App-header {
-  	background-color: white;
-  	margin: 0 auto;
+	/* background-color: white;	   */
+	margin: 0 auto;
   	font-size: calc(4px + 2vmin);
 	color: black;
-	padding: 10px;  
 	align-items: stretch;
+	/* box-shadow: 0 0 7px 1px #141414;
+	margin-bottom: 2rem; */
+}
+
+.SearchBox {
+	background-color: rgb(230, 213, 119);
+	padding: 10px;  
 }
 
 .Title {
 	float: left;
+	margin-right: 1vw;
 }
 
 .tree {
 	text-align: center;
+	z-index: 0;
 }
 
 .course-node {
 	margin: 0.5rem;
 	width: 150px;
 	display: inline-block;
+	z-index: 0;
 }
 
 .course-node-title {
 	padding: 0.4rem;
 	font-weight: bold;
-	text-align: center;
+	text-align: left;
+	padding-left: 0.5rem;
+}
+
+.course-node-name {
+	float: left;
+}
+
+.course-node-flag {
+	margin-top: 0.1em;
+	text-align: right;
+	margin-right: 0.2rem;
+	color: black;
 }
 
 .course-node-body {
-  font-size: 0.9rem;
+	font-size: 0.9rem;
 	padding-top: 0.2rem;
 	padding-bottom: 0.2rem;
 }
 
 .course-org-chart {
-  overflow: auto;
+	overflow: auto;
 	margin: 0 auto;
+	background-color: transparent;
+	border: 0;
 }
 
 .details-main-container {
@@ -51,7 +74,7 @@
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
-	padding: 5px 10px;
+	padding: 1rem 0rem 1rem 0rem;
 }
 
 .details-title {
@@ -78,11 +101,25 @@
 	padding-bottom: 0.2rem;
 }
 
+.schedule-button {
+	transform: rotate(-90deg);
+	position: fixed;
+	top: 50%;
+	right: 0;
+	z-index: 1;
+	left: calc(100% - 65px);
+	box-shadow: -2px -2px 4px lightgrey;
+}
+
 /* overwriting bootstrap styles */
-.main-78 {
+.ms-Dialog-main {
 	width: 65%;
 }
 
 .ms-Modal-scrollableContent {
 	overflow: hidden;
+}
+
+.ms-Panel-main {
+	width: 60%;
 }
