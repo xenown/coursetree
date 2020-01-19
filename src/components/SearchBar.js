@@ -3,7 +3,6 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { FocusZone } from 'office-ui-fabric-react/lib/FocusZone';
 import { List } from 'office-ui-fabric-react/lib/List';
 import { mergeStyleSets, getTheme, getFocusStyle } from 'office-ui-fabric-react/lib/Styling';
-// import { Depths } from '@uifabric/fluent-theme/lib/fluent/FluentDepths';
 import data from '../CS_res.json';
 
 

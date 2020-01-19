@@ -37,7 +37,19 @@
 .course-node-title {
 	padding: 0.4rem;
 	font-weight: bold;
-	text-align: center;
+	text-align: left;
+	padding-left: 0.5rem;
+}
+
+.course-node-name {
+	float: left;
+}
+
+.course-node-flag {
+	margin-top: 0.1em;
+	text-align: right;
+	margin-right: 0.2rem;
+	color: black;
 }
 
 .course-node-body {

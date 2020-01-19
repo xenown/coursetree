@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import data from '../CS_res.json'
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
+import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
+import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 
 class CourseOrgChart extends Component {
   constructor(props) {
@@ -11,10 +13,38 @@ class CourseOrgChart extends Component {
       nodeTotal: 0
     }
   }
+
+  iconClass = mergeStyles({
+    fontSize: 15,
+    height: 10,
+    width: 10,
+    marginLeft: 10
+  });
+
+  classNames = mergeStyleSets({
+    red: [{ color: '#de4605' }, this.iconClass],
+    blue: [{ color: '#4884fe' }, this.iconClass],
+    green: [{ color: '#58810b' }, this.iconClass]
+  });
+
   CourseNode = ({ node }) => {
     return (
       <div className="card course-node" > {node.nodeIndex}
-        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}> {node.code} </div>
+        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}>
+          <div className="course-node-name">{node.code}</div>
+          <div className="course-node-flag">
+            {node.offered.map((term) => {
+              switch (term) {
+                case "F":
+                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
+                case "W":
+                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
+                case "S":
+                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
+              }
+            })}
+          </div>
+        </div>
         <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.id)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
       </div>
