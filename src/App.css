@@ -1,53 +1,26 @@
 .App {
-	/* text-align: center; */
 	background-color: white;
-}
-
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: rgb(78, 156, 245);
-}
-
-li {
-	float: left;
-	color: white;
-	padding: 1em;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-	background-color: #111;
 }
 
 .App-header {
 	background-color: white;
-	min-height: auto;
 	width: 75%;
 	margin: 0 auto;
-	padding: 10px;
-	/* display: flex; */
-	/* vertical-align: middle; */
-	/* flex-direction: column; */
-	/* align-items: center; */
-	/* justify-content: center; */
+	display: flex;
 	font-size: calc(10px + 2vmin);
 	color: black;
 }
 
-.App-link {
-	color: #61dafb;
+.Title {
+	flex-grow: 8;
 }
 
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.SearchBar {
+	flex-grow: 2;
+}
+
+.tree {
+	text-align: center;
 }
 
 .course-node {
@@ -68,9 +41,9 @@ li a:hover {
 }
 
 .course-org-chart {
-	width: 50%;
-	margin-left: 10%;
-	margin-top: 5%;
+	margin: 0 auto;
+	/* margin-left: 10%;
+  margin-top: 5% */
 }
 
 .details-container {
