@@ -49,11 +49,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className="Title">CourseTree</div>
-          <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse}/>
+          <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
         </header>
         <div className="tree">
           <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen} toggleOpen={this.toggleOpen} />
-          {this.state.treeBaseCourse == null ? <div/> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
+          {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
         </div>
       </div >
     );

@@ -13,10 +13,10 @@ class CourseOrgChart extends Component {
   }
   CourseNode = ({ node }) => {
     return (
-      <div class="card course-node" onClick={() => this.props.handleClick(node.id)}> {node.nodeIndex}
-        <div class="card-header card-header course-node-title"> {node.code} </div>
-        <div class="card-body course-node-body"> {node.name} </div>
-        <div class="expand-children card-footer" onClick={() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
+      <div className="card course-node" onClick={() => this.props.handleClick(node.id)}> {node.nodeIndex}
+        <div className="card-header card-header course-node-title"> {node.code} </div>
+        <div className="card-body course-node-body"> {node.name} </div>
+        <div className="expand-children card-footer" onClick={() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
       </div>
 
     );
@@ -40,7 +40,7 @@ class CourseOrgChart extends Component {
     this.state.nodeTotal = 0
     let courseTree = this.buildTree(this.props.courseRoot)
     return (
-      <div class="course-org-chart card">
+      <div className="course-org-chart card">
         <OrgChart tree={courseTree} NodeComponent={this.CourseNode} />
       </div>
 
