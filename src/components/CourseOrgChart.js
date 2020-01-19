@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
@@ -7,6 +7,7 @@ import CourseNode from './CourseNode'
 const courseTree = {
   courseName: "Logic but with computers or Something",
   courseCode: "SE-212",
+  id: 12886,
   children: [
     {
       courseName: "Foundations of Sequential Programs",
@@ -26,14 +27,23 @@ const courseTree = {
 };
 
 class CourseOrgChart extends Component {
-    render () {
-      return (
-          <div class="course-org-chart card">
-              <OrgChart tree={courseTree} NodeComponent={CourseNode} />
-          </div>
-          
-      )      
-    }   
+  CourseNode = ({ node }) => {
+    return (
+      <div className="card course-node" onClick={() => this.props.handleClick(node.id)}>
+        <div class="card-header card-header course-node-title"> {node.courseCode} </div>
+        <div class="card-body course-node-body"> {node.courseName} </div>
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <div class="course-org-chart card">
+        <OrgChart tree={courseTree} NodeComponent={this.CourseNode} />
+      </div>
+
+    )
+  }
 }
 
 export default CourseOrgChart
