@@ -22,7 +22,7 @@ class App extends Component {
       treeBaseCourse: null,
       selectedCourseCode: null,
       coursesTaken: [],
-      coursesChosen: 
+      coursesChosen:
       {
         1: [data[0]],
         2: [],
@@ -65,7 +65,7 @@ class App extends Component {
   addCourse = () => {
     let temp = this.state.coursesTaken;
     temp.push(this.state.selectedCourseCode);
-    this.setState({ 
+    this.setState({
       isCourseOpen: !this.state.isCourseOpen,
       coursesTaken: temp
     });
@@ -73,8 +73,8 @@ class App extends Component {
 
   courseExists = () => {
     let ret = false;
-    for (let c in this.state.coursesTaken){
-      if (this.state.coursesTaken[c] == this.state.selectedCourseCode){
+    for (let c in this.state.coursesTaken) {
+      if (this.state.coursesTaken[c] === this.state.selectedCourseCode) {
         ret = true;
         break;
       }
@@ -89,11 +89,11 @@ class App extends Component {
           <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
         </header>
         <div className="tree">
-          <CourseDetail courseCode={this.state.selectedCourseCode} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse} 
-          addCourse={this.addCourse} courseAdded={this.courseExists}/>
+          <CourseDetail courseCode={this.state.selectedCourseCode} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse}
+            addCourse={this.addCourse} courseAdded={this.courseExists} />
           {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
 
-          <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen}/>
+          <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen} />
         </div>
         <DefaultButton className="schedule-button" onClick={() => this.toggleSchedule()}>Schedule</DefaultButton>
       </div >
