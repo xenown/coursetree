@@ -1,73 +1,85 @@
 .App {
-  /* text-align: center; */
-  background-color: #cecccc;
+	/* text-align: center; */
+	background-color: #cecccc;
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: rgb(78, 156, 245);
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: rgb(78, 156, 245);
 }
 
 li {
-  float: left;
-  color: white;
-  padding: 1em;
+	float: left;
+	color: white;
+	padding: 1em;
 }
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-  background-color: #111;
+	background-color: #111;
 }
 
 .App-header {
-  background-color: white;
-  min-height: 100vh;
-  width: 75%;
-  margin: 0 auto;
-  padding: 10;
-  /* display: flex; */
-  /* vertical-align: middle; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
-  color: black;
+	background-color: white;
+	min-height: 100vh;
+	width: 75%;
+	margin: 0 auto;
+	padding: 10;
+	/* display: flex; */
+	/* vertical-align: middle; */
+	/* flex-direction: column; */
+	/* align-items: center; */
+	/* justify-content: center; */
+	font-size: calc(10px + 2vmin);
+	color: black;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .course-node {
-  width: 150px;
-  display: inline-block;
+	width: 150px;
+	display: inline-block;
 }
 
 .course-node-title {
-  padding: 0.4rem;
-  font-weight: bold;
-  text-align: center;
+	padding: 0.4rem;
+	font-weight: bold;
+	text-align: center;
 }
 
 .course-node-body {
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
 }
 
 .course-org-chart {
-  width: 50%;
-  margin-left: 10%;
-  margin-top: 5%
+	width: 50%;
+	margin-left: 10%;
+	margin-top: 5%;
+}
+
+.details-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	padding: 5px 10px;
+}
+
+.details-text {
+	text-align: center;
 }
