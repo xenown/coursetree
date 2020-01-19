@@ -35,7 +35,7 @@
 	{
 		"code": "CS 115",
 		"name": "Introduction to Computer Science 1",
-		"prereq": "",
+		"prereq": [],
 		"Note": "[Note: See Note 2 above. ",
 		"offered": ["F", "W", "S"],
 		"id": 12765,
@@ -57,7 +57,7 @@
 	{
 		"code": "CS 135",
 		"name": "Designing Functional Programs",
-		"prereq": "",
+		"prereq": [],
 		"Note": "[Note: See Note 2 above. ",
 		"offered": ["F", "W"],
 		"id": 12040,
