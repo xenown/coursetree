@@ -9,7 +9,7 @@ class CourseDetail extends Component {
 
   getCourseCode = (id) => {
     for (let item in data) {
-      if (data[item]["course_id"] == 12886) {
+      if (data[item]["id"] === id) {
         return data[item]["code"]
       }
     }
@@ -17,7 +17,7 @@ class CourseDetail extends Component {
 
   getCourseTitle = (id) => {
     for (let item in data) {
-      if (data[item]["course_id"] == 12886) {
+      if (data[item]["id"] === id) {
         return data[item]["name"]
       }
     }
@@ -25,7 +25,7 @@ class CourseDetail extends Component {
 
   getCourseDesc = (id) => {
     for (let item in data) {
-      if (data[item]["course_id"] == 12886) {
+      if (data[item]["id"] === id) {
         return data[item]["description"]
       }
     }
@@ -53,8 +53,6 @@ const cardContainerStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   alignContent: 'center',
-  border: 'black',
-  borderStyle: 'solid',
   padding: '5px 10px',
 }
 

@@ -51,6 +51,7 @@ li a:hover {
 }
 
 .course-node {
+  margin: 0.5rem;
   width: 150px;
   display: inline-block;
 }

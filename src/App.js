@@ -20,17 +20,12 @@ class App extends Component {
   }
 
   handleCourseClick = (id) => {
-    this.setState({ isModalOpen: !this.state.isModalOpen, selectedCourseId: 12886 });
     console.log(id)
-  }
-
-  getOpenState = () => {
-    return this.state.isModalOpen;
+    this.setState({ isModalOpen: !this.state.isModalOpen, selectedCourseId: id });
   }
 
   toggleOpen = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
-    console.log(this.getOpenState())
   }
 
   render() {
@@ -40,12 +35,13 @@ class App extends Component {
           CourseTree
           <SearchBar />
         </header>
-        <PrimaryButton onClick={this.handleCourseClick}>012886</PrimaryButton>
+        <PrimaryButton onClick={this.handleCourseClick}>12886</PrimaryButton>
         <PrimaryButton>HI</PrimaryButton>
         <PrimaryButton>HI</PrimaryButton>
         <PrimaryButton>HI</PrimaryButton>
-        <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen} toggleOpen={this.toggleOpen} />
-        <CourseOrgChart courseRoot="CS 241"/>
+        <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen}
+          toggleOpen={this.toggleOpen} />
+        <CourseOrgChart courseRoot="CS 241" handleClick={this.handleCourseClick} />
       </div >
     );
   }
