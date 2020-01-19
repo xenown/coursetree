@@ -8,6 +8,8 @@ import CourseOrgChart from './components/CourseOrgChart'
 import { initializeIcons } from '@uifabric/icons';
 import { DefaultButton } from 'office-ui-fabric-react';
 
+import data from './CS_res.json';
+
 initializeIcons();
 
 class App extends Component {
@@ -19,6 +21,24 @@ class App extends Component {
       isScheduleOpen: false,
       treeBaseCourse: null,
       selectedCourseId: null,
+      coursesChosen: 
+      {
+        1: [data[0]],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+        11: [],
+        12: [],
+        13: [],
+        14: [],
+        15: []
+      }
     }
   }
 
@@ -51,7 +71,7 @@ class App extends Component {
           <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse} />
           {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
 
-          <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} />
+          <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen}/>
         </div>
         <DefaultButton className="schedule-button" onClick={() => this.toggleSchedule()}>Schedule</DefaultButton>
       </div >

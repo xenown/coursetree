@@ -23,6 +23,7 @@ class SearchBar extends Component {
     itemCell: [
       getFocusStyle(theme, { inset: -1 }),
       {
+        backgroundColor: 'white',
         minHeight: 54,
         padding: 10,
         boxSizing: 'border-box',
@@ -37,9 +38,9 @@ class SearchBar extends Component {
       marginTop: "1vh",
       backgroundColor: "white",
       overflow: 'auto',
-      marginLeft: '14vh',
+      marginLeft: '15vh',
       marginRight: '1vh',
-      width: '100vw',
+      width: '90%',
       zIndex: 1,
       maxHeight: '15vh',
       position: 'absolute',
@@ -47,10 +48,10 @@ class SearchBar extends Component {
     itemContent: {
       marginLeft: 10,
       overflow: 'hidden',
-      flexGrow: 1
+      flexGrow: 1,
     },
     itemName: [
-      fonts.xLarge,
+      fonts.large,
       {
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -126,7 +127,6 @@ class SearchBar extends Component {
               onFocus={this.filter}
               onBlur={this.unFocus}
               onChange={this.filter}
-            // style={{ boxShadow: Depths.depth8 }}
             />
           </div>
           <div className="List">

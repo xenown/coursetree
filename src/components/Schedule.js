@@ -61,9 +61,25 @@ class Schedule extends Component {
       <Panel isOpen={this.props.isOpen} onDismiss={this._close} class="panel">
         <div className="details-main-container row">
           <div className="details-container col-9">
-            <h3 className="details-title">{this.getCode(12766)}</h3>
+            <dl>
+              {
+                Object.keys(this.props.coursesChosen).map((key) => {
+                  this.props.coursesChosen[key].map((course) => {
+                    return (<div className="card">
+                      {course.code}
+                    </div>)
+                  });
+                })}
+              {/* <dt>Prereqs:</dt>
+              <dd>{this.getPrereqs(12766)}</dd>
+              <hr />
+              <dt>Antireqs:</dt>
+              <dd>{this.getAntireqs(12766)}</dd>
+              <hr /> */}
+            </dl>
+            {/* <h3 className="details-title">{this.getCode(12766)}</h3>
             <h5 className="details-title">{this.getTitle(12766)}</h5>
-            <p className="details-body modal-body">{this.getDesc(12766)}</p>
+            <p className="details-body modal-body">{this.getDesc(12766)}</p> */}
           </div>
           <div className="details-column col-3">
             <dl>

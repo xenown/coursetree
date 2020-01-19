@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url("https://image.freepik.com/free-photo/white-paper-background_1154-683.jpg"); */
+  background-repeat: repeat;
+  background-image: url("https://backgroundcheckall.com/wp-content/uploads/2017/12/pastel-repeating-background.gif");
+  
 }
 
 code {
