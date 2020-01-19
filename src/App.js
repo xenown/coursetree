@@ -39,6 +39,12 @@ class App extends Component {
     })
   }
 
+  updateTreeBaseCourse = (course_id) => {
+    this.setState({
+      treeBaseCourse: course_id
+    })
+  }
+
   render() {
     return (
       <div className="App">
