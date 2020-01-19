@@ -60,9 +60,6 @@ class SearchBar extends Component {
             fontSize: 0,
             position: 'relative',
             height: "100%"
-        },
-        searchBox: {
-            
         }
     });
 
@@ -76,7 +73,7 @@ class SearchBar extends Component {
         console.log(text);
         this.setState({
             searchText: text,
-            searchResults: text ? (text === "" ? [] : data.filter(item => item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0)) : []
+            searchResults: text ? (text === "" ? [] : data.filter(item => (item.code+item.name).toLowerCase().indexOf(text.toLowerCase()) >= 0)) : []
         });
     }
 
@@ -96,8 +93,8 @@ class SearchBar extends Component {
         return (
             <div className={this.classNames.itemCell} onMouseDown={this.onClickCell} data-is-focusable={true}>
                 {/* <Image className={classNames.itemImage} src={item.thumbnail} width={50} height={50} imageFit={ImageFit.cover} /> */}
-                <div id={item.course_id} className={this.classNames.itemContent}>
-                    <div id={index} className={this.classNames.itemName}>{item.code + " " + item.name}</div>
+                <div className={this.classNames.itemContent}>
+                    <div id={item.code} className={this.classNames.itemName}>{item.code + " " + item.name}</div>
                     {/* {item.note === "" ? <div /> : <div className={this.classNames.itemNote}>{item.note}</div>} */}
                     {/* <div className={this.classNames.itemDescription}>{item.description}</div> */}
                 </div>
@@ -111,9 +108,7 @@ class SearchBar extends Component {
             <div>
                 <FocusZone>
                     <SearchBox
-                        className={this.classNames.searchBox}
                         placeholder="Search for Courses!"
-                        onSearch={newValue => console.log('value is ' + newValue)}
                         onFocus={() => console.log('onFocus called')}
                         onBlur={this.unFocus}
                         onChange={this.filter}
