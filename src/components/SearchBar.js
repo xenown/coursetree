@@ -5,6 +5,7 @@ import { List } from 'office-ui-fabric-react/lib/List';
 import { mergeStyleSets, getTheme, getFocusStyle } from 'office-ui-fabric-react/lib/Styling';
 import data from '../CS_res.json';
 
+
 const theme = getTheme();
 const { palette, semanticColors, fonts } = theme;
 
@@ -22,18 +23,27 @@ class SearchBar extends Component {
     itemCell: [
       getFocusStyle(theme, { inset: -1 }),
       {
-        zIndex: 2,
-        background: 'white',
         minHeight: 54,
         padding: 10,
         boxSizing: 'border-box',
-        borderBottom: `1px solid ${semanticColors.bodyDivider}`,
+        // borderTop: `1px solid ${semanticColors.bodyDivider}`,
         display: 'flex',
         selectors: {
           '&:hover': { background: palette.neutralLight }
         }
       }
     ],
+    list: {
+      marginTop: "1vh",
+      backgroundColor: "white",
+      overflow: 'auto',
+      marginLeft: '14vh',
+      marginRight: '1vh',
+      width: '100vw',
+      zIndex: 1,
+      maxHeight: '15vh',
+      position: 'absolute',
+    },
     itemContent: {
       marginLeft: 10,
       overflow: 'hidden',
@@ -70,12 +80,12 @@ class SearchBar extends Component {
       searchText: e.target.value
     });
   }
-
-  filter = (e, text) => {
-    console.log(text);
+  filter = (e) => {
+    console.log(e.target.value);
+    let t = e.target.value;
     this.setState({
-      searchText: text,
-      searchResults: text ? (text === "" ? [] : data.filter(item => (item.code + item.name).toLowerCase().indexOf(text.toLowerCase()) >= 0)) : []
+      searchText: t,
+      searchResults: t ? (t === "" ? [] : data.filter(item => (item.code + item.name).toLowerCase().indexOf(t.toLowerCase()) >= 0)) : []
     });
   }
 
@@ -109,16 +119,23 @@ class SearchBar extends Component {
     return (
       <div>
         <FocusZone>
-          <SearchBox
-            placeholder="Search for Courses!"
-            onFocus={() => console.log('onFocus called')}
-            onBlur={this.unFocus}
-            onChange={this.filter}
-          />
-          <List
-            items={this.state.searchResults}
-            onRenderCell={this.renderCell}
-            className={this.classNames.listGridExample} />
+          <div className="SearchBox">
+            <div className="Title">CourseTree</div>
+            <SearchBox
+              placeholder="Search for Courses!"
+              onFocus={this.filter}
+              onBlur={this.unFocus}
+              onChange={this.filter}
+            // style={{ boxShadow: Depths.depth8 }}
+            />
+          </div>
+          <div className="List">
+            {/* <div className="Title" style={{ color: "transparent" }}>CourseTree</div> */}
+            <List
+              items={this.state.searchResults}
+              onRenderCell={this.renderCell}
+              className={this.classNames.list} />
+          </div>
         </FocusZone>
       </div>
     )

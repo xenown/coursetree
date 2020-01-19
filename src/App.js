@@ -35,15 +35,9 @@ class App extends Component {
     this.setState({ isScheduleOpen: !this.state.isScheduleOpen });
   }
 
-  updateTreeBaseCourse = (course_id) => {
+  updateTreeBaseCourse = (coursename) => {
     this.setState({
-      treeBaseCourse: course_id
-    })
-  }
-
-  updateTreeBaseCourse = (course_id) => {
-    this.setState({
-      treeBaseCourse: course_id
+      treeBaseCourse: coursename
     })
   }
 
@@ -51,8 +45,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div className="Title">CourseTree</div>
-          <SearchBar className="SearchBar search-bar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
+          <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse} />
         </header>
         <div className="tree">
           <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse} />
