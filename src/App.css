@@ -46,6 +46,10 @@
   margin-top: 5% */
 }
 
+.details-main-container {
+	padding: 10px;
+}
+
 .details-container {
 	display: flex;
 	flex-direction: column;
@@ -54,11 +58,35 @@
 	padding: 5px 10px;
 }
 
-.details-text {
+.details-title {
 	text-align: center;
+	width: 65%;
+}
+
+.details-body {
+	text-align: center;
+	margin: 0px;
+}
+
+.details-column {
+	padding: 1rem 2rem 1rem 1rem;
+	border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details-column dd {
+	text-align: right;
 }
 
 .expand-children {
 	padding-top: 0.2rem;
 	padding-bottom: 0.2rem;
+}
+
+/* overwriting bootstrap styles */
+.main-78 {
+	width: 65%;
+}
+
+.ms-Modal-scrollableContent {
+	overflow: hidden;
 }
