@@ -3,20 +3,16 @@
 }
 
 .App-header {
-	background-color: white;
-	width: 75%;
-	margin: 0 auto;
-	display: flex;
-	font-size: calc(10px + 2vmin);
+  	background-color: white;
+  	margin: 0 auto;
+  	font-size: calc(4px + 2vmin);
 	color: black;
+	padding: 10px;  
+	align-items: stretch;
 }
 
 .Title {
-	flex-grow: 8;
-}
-
-.SearchBar {
-	flex-grow: 2;
+	float: left;
 }
 
 .tree {
@@ -42,8 +38,6 @@
 
 .course-org-chart {
 	margin: 0 auto;
-	/* margin-left: 10%;
-  margin-top: 5% */
 }
 
 .details-container {
