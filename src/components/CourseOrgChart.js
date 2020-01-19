@@ -13,16 +13,15 @@ class CourseOrgChart extends Component {
   }
   CourseNode = ({ node }) => {
     return (
-      <div className="card course-node" onClick={() => this.props.handleClick(node.id)}> {node.nodeIndex}
-        <div className="card-header card-header course-node-title"> {node.code} </div>
-        <div className="card-body course-node-body"> {node.name} </div>
+      <div className="card course-node" > {node.nodeIndex}
+        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}> {node.code} </div>
+        <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.id)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
       </div>
 
     );
   };
   buildTree(coursename) {
-    console.log("Building Tree")
     let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
     let rootNode = JSON.parse(JSON.stringify(tempData[0]))
     rootNode.nodeIndex = this.state.nodeTotal++
