@@ -5,6 +5,12 @@ import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
 
 class CourseOrgChart extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      nodeTotal: 0
+    }
+  }
   CourseNode = ({ node }) => {
     return (
       <div className="card course-node" onClick={() => this.props.handleClick(node.id)}>
