@@ -80,7 +80,7 @@ class Schedule extends Component {
 
   render() {
     return (
-      <Panel isOpen={this.props.isOpen} onDismiss={this._close} class="panel">
+      <Panel isOpen={this.props.isOpen} onDismiss={this._close} class="panel" styles={{right: "auto"}}>
         <div className="details-main-container row">
           <div className="schedule-details-column col-9">
             {

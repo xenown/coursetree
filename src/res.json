@@ -382,7 +382,10 @@
         "children": [],
         "Note": "[Note: Enrolment is restricted; see Note 1 above.  is not scheduled and students are expected to find time in open hours to complete their work. ",
         "id": 11416,
-        "antireq": []
+        "antireq": [],
+        "useful": 0.9,
+		"enjoyment": 0.6,
+		"difficulty": 0.3
     },
     "CS 241E": {
         "code": "CS 241E",
