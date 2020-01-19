@@ -3,6 +3,7 @@ import './App.css';
 import SearchBar from './components/SearchBar'
 import CourseDetail from './components/CourseDetail'
 import Schedule from './components/Schedule'
+import Filters from './components/Filters'
 import CourseOrgChart from './components/CourseOrgChart'
 
 import { initializeIcons } from '@uifabric/icons';
@@ -19,6 +20,8 @@ class App extends Component {
     this.state = {
       isCourseOpen: false,
       isScheduleOpen: false,
+      isFiltersOpen: false,
+      filter: "difficulty",
       treeBaseCourse: null,
       selectedCourseCode: null,
       coursesTaken: [],
@@ -56,6 +59,14 @@ class App extends Component {
     this.setState({ isScheduleOpen: !this.state.isScheduleOpen });
   }
 
+  toggleFilters = () => {
+    this.setState({ isFiltersOpen: !this.state.isFiltersOpen });
+  }
+
+  changeFilter = (newFilter) => {
+    this.setState({ filter: newFilter });
+  }
+
   updateTreeBaseCourse = (coursename) => {
     this.setState({
       treeBaseCourse: coursename
@@ -65,9 +76,9 @@ class App extends Component {
   addCourse = (code) => {
     let avail = data[code]['offered']
     let addedCourse = false;
-    for (let i in avail){
+    for (let i in avail) {
       let indexOffset;
-      switch (avail[i]){
+      switch (avail[i]) {
         case "F":
           indexOffset = 0;
           break;
@@ -80,11 +91,11 @@ class App extends Component {
         default:
           alert("Unable to add.")
           return
-      } 
-      for (let i = 0; i < Object.keys(this.state.coursesChosen).length; i+=3){
+      }
+      for (let i = 0; i < Object.keys(this.state.coursesChosen).length; i += 3) {
         console.log(parseInt(i) + parseInt(indexOffset))
-        let index = parseInt(i) + parseInt(indexOffset) + 1; 
-        if (this.state.coursesChosen[index.toString()].length <= 5){
+        let index = parseInt(i) + parseInt(indexOffset) + 1;
+        if (this.state.coursesChosen[index.toString()].length <= 5) {
           let bigTemp = this.state.coursesChosen;
           let temp = bigTemp[index.toString()];
           temp.push(data[this.state.selectedCourseCode]);
@@ -98,7 +109,7 @@ class App extends Component {
       }
       if (addedCourse) { break }
     }
-    if (!addedCourse){
+    if (!addedCourse) {
       alert("Unable to add.")
       return
     }
@@ -113,8 +124,8 @@ class App extends Component {
 
   courseExists = (code) => {
     let ret = false;
-    for (let c in this.state.coursesTaken){
-      if (this.state.coursesTaken[c] == code){
+    for (let c in this.state.coursesTaken) {
+      if (this.state.coursesTaken[c] === code) {
         ret = true;
         break;
       }
@@ -123,6 +134,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.filter)
     return (
       <div className="App">
         <header className="App-header">
@@ -131,11 +143,13 @@ class App extends Component {
         <div className="tree">
           <CourseDetail courseCode={this.state.selectedCourseCode} isOpen={this.state.isCourseOpen} toggleOpen={this.toggleCourse}
             addCourse={this.addCourse} courseAdded={this.courseExists} />
-          {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} />}
+          {this.state.treeBaseCourse == null ? <div /> : <CourseOrgChart courseRoot={this.state.treeBaseCourse} handleClick={this.handleCourseClick} filter={this.state.filter} />}
 
+          <Filters isOpen={this.state.isFiltersOpen} toggleOpen={this.toggleFilters} handleFilter={this.changeFilter} filter={this.state.filter} />
           <Schedule isOpen={this.state.isScheduleOpen} toggleOpen={this.toggleSchedule} coursesChosen={this.state.coursesChosen} />
         </div>
         <DefaultButton className="schedule-button" onClick={() => this.toggleSchedule()}>Schedule</DefaultButton>
+        <DefaultButton className="filters-button" onClick={() => this.toggleFilters()}>Filters</DefaultButton>
       </div >
     );
   }

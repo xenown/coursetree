@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import data from '../res.json'
+import data2 from '../CS_res.json'
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
 import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
@@ -31,11 +32,12 @@ class CourseOrgChart extends Component {
   });
 
   CourseNode = ({ node }) => {
+    console.log(node["difficulty"])
     return (
-      <div className="card course-node" >
-        <div className="card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
-          <div className="course-node-name">{node.code}</div>
-          <div className="course-node-flag">
+      <div className="card course-node" style={{"box-shadow": "0px 0px 10px " + this.getColor(node[this.props.filter])}}>
+        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
+          <div className="course-node-name">{node.code}</div> {node.difficulty}
+          <div className="course-node-flag"> 
             {
               node.offered.map((term, index) => {
                 switch (term) {
@@ -55,9 +57,14 @@ class CourseOrgChart extends Component {
         <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.code)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.collapse(node.nodeIndex, this.state.courseTree, this.state.courseTreeCollapse)} > Prereqs ({node.prereq.length}) </div>
       </div>
-
     );
   };
+
+  getColor(value){
+    //value from 0 to 1
+    var hue=((1-value)*120).toString(10);
+    return ["hsl(",hue,",100%,50%)"].join("");
+  }
 
   collapse(index, treeRoot, collapseRoot) {
     if (treeRoot.nodeIndex === index) {
@@ -89,6 +96,9 @@ class CourseOrgChart extends Component {
     // let tempData = JSON.parse(JSON.stringify());
     let rootNode = JSON.parse(JSON.stringify(data[coursename]))
     rootNode["nodeIndex"] = this.nodeTotal++
+    rootNode["difficulty"] = this.getFilter("difficulty", coursename)
+    rootNode["useful"] = this.getFilter("useful", coursename)
+    rootNode["enjoyment"] = this.getFilter("enjoyment", coursename)
     if (rootNode) {
       for (let childCourse of rootNode.prereq) {
         let childTree = JSON.parse(JSON.stringify(this.buildTree(childCourse)))
@@ -98,6 +108,14 @@ class CourseOrgChart extends Component {
       }
     }
     return rootNode
+  }
+
+  getFilter = (filter, code) => {
+    for (let item in data2) {
+      if (data2[item]["code"] === code) {
+        return data2[item][filter]
+      }
+    }
   }
 
   init() {
@@ -114,6 +132,7 @@ class CourseOrgChart extends Component {
 
   render() {
     console.log("Rendering")
+    console.log(this.props.filter)
     //console.log(this.state.root + " " + this.props.rootNode)
     if (this.state.root !== this.props.courseRoot) { this.init() }
 

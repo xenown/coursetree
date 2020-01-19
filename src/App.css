@@ -1,7 +1,7 @@
 .App-header {
 	/* background-color: white;	   */
 	margin: 0 auto;
-  	font-size: calc(4px + 2vmin);
+	font-size: calc(4px + 2vmin);
 	color: black;
 	align-items: stretch;
 	/* box-shadow: 0 0 7px 1px #141414;
@@ -10,12 +10,12 @@
 
 .SearchBox {
 	background-color: rgb(149, 191, 222);
-	padding: 10px;  
+	padding: 10px;
 }
 
 .Title {
-  float: left;
-  font-weight: bold;
+	float: left;
+	font-weight: bold;
 	margin-right: 1vw;
 }
 
@@ -29,7 +29,7 @@
 	height: 50px;
 }
 
-.CourseLabel{
+.CourseLabel {
 	display: inline-block;
 	z-index: 0;
 }
@@ -125,10 +125,24 @@
 .schedule-button {
 	transform: rotate(-90deg);
 	position: fixed;
-	top: 50%;
+	top: 40%;
 	right: 0;
 	z-index: 1;
 	left: calc(100% - 65px);
+	box-shadow: -2px -2px 4px lightgrey;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.filters-button {
+	transform: rotate(-90deg);
+	position: fixed;
+	top: 60%;
+	right: 0;
+	z-index: 1;
+	left: calc(100% - 55px);
 	box-shadow: -2px -2px 4px lightgrey;
 }
 
@@ -143,4 +157,56 @@
 
 .ms-Panel-main {
 	width: 60%;
+}
+
+.filters-header {
+	margin-left: 1rem;
+	font-weight: bold;
+	font-size: 3rem;
+}
+
+.filters-subtitle {
+	font-weight: bold;
+	font-size: 1.5rem;
+	margin: 1.1rem 1rem 1rem 1rem;
+}
+
+.filters-subtext {
+	font-style: italic;
+	margin: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.filter-option {
+	margin-left: 1.5rem;
+}
+
+.flag-sub-head {
+	margin-left: 1.5rem;
+}
+
+.flag-label {
+	margin-left: 1rem;
+}
+
+.flag-winter {
+	margin-left: 0.2rem;
+	font-weight: bold;
+	color: #4884fe;
+}
+
+.flag-fall {
+	margin-left: 0.2rem;
+	font-weight: bold;
+	color: #de4605;
+}
+
+.flag-spring {
+	margin-left: 0.2rem;
+	font-weight: bold;
+	color: #58810b;
+}
+
+.bold-option {
+	margin-left: 0.2rem;
+	font-weight: bold;
 }

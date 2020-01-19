@@ -266,7 +266,9 @@
         "code": "CS 245E",
         "name": "Logic and Computation (Enriched)",
         "offered": [
-            "D"
+            "F", 
+            "W", 
+            "S"
         ],
         "prereq": [
             "CS 136",
@@ -380,7 +382,10 @@
         "children": [],
         "Note": "[Note: Enrolment is restricted; see Note 1 above.  is not scheduled and students are expected to find time in open hours to complete their work. ",
         "id": 11416,
-        "antireq": []
+        "antireq": [],
+        "useful": 0.9,
+		"enjoyment": 0.6,
+		"difficulty": 0.3
     },
     "CS 241E": {
         "code": "CS 241E",
@@ -805,7 +810,7 @@
         "code": "CS 246E",
         "name": "Object-Oriented Software Development (Enriched)",
         "offered": [
-            "D"
+            "F", "W", "S"
         ],
         "prereq": [
             "CS 136",
@@ -1139,7 +1144,9 @@
         "code": "CS 240E",
         "name": "Data Structures and Data Management (Enriched)",
         "offered": [
-            "D"
+            "F", 
+            "W", 
+            "S"
         ],
         "prereq": [
             "CS 241",
