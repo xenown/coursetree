@@ -1,6 +1,6 @@
 .App {
 	/* text-align: center; */
-	background-color: #cecccc;
+	background-color: white;
 }
 
 ul {
@@ -24,10 +24,10 @@ li a:hover {
 
 .App-header {
 	background-color: white;
-	min-height: 100vh;
+	min-height: auto;
 	width: 75%;
 	margin: 0 auto;
-	padding: 10;
+	padding: 10px;
 	/* display: flex; */
 	/* vertical-align: middle; */
 	/* flex-direction: column; */
