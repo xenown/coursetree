@@ -5,11 +5,17 @@ import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
 
 class CourseOrgChart extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      nodeTotal: 0
+    }
+  }
   CourseNode = ({ node }) => {
     return (
-      <div className="card course-node" onClick={() => this.props.handleClick(node.id)}>
-        <div className="card-header card-header course-node-title"> {node.code} </div>
-        <div className="card-body course-node-body"> {node.name} </div>
+      <div className="card course-node" > {node.nodeIndex}
+        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}> {node.code} </div>
+        <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.id)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
       </div>
 
@@ -22,16 +28,16 @@ class CourseOrgChart extends Component {
     let rootNode = tempData[0];
     if (rootNode && rootNode.children.length === 0) {
       for (let childCourse of rootNode.prereq) {
-        let childTree = this.buildTree(childCourse)
+        let childTree = JSON.parse(JSON.stringify(this.buildTree(childCourse)))
         if (childTree) {
           rootNode.children.push(childTree)
         }
       }
     }
-    console.log(rootNode)
     return rootNode
   }
   render() {
+    this.state.nodeTotal = 0
     let courseTree = this.buildTree(this.props.courseRoot)
     return (
       <div className="course-org-chart card">
