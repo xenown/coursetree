@@ -3,7 +3,8 @@
 }
 
 .App-header {
-  	margin: 0 auto;
+	background-color: white;	  
+	margin: 0 auto;
   	font-size: calc(4px + 2vmin);
 	color: black;
 	align-items: stretch;
@@ -40,13 +41,13 @@
 }
 
 .course-node-body {
-  font-size: 0.9rem;
+	font-size: 0.9rem;
 	padding-top: 0.2rem;
 	padding-bottom: 0.2rem;
 }
 
 .course-org-chart {
-  overflow: auto;
+	overflow: auto;
 	margin: 0 auto;
 }
 

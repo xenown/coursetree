@@ -58,7 +58,7 @@ class CourseDetail extends Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.isOpen} onDismiss={this._close} className="modal">
+      <Modal isOpen={this.props.isOpen} onDismiss={this._close} class="modal">
         <div className="details-main-container row">
           <div className="details-container col-9">
             <h3 className="details-title">{this.getCode(this.props.courseId)}</h3>
@@ -77,7 +77,6 @@ class CourseDetail extends Component {
               <dd>{this.getAntireqs(this.props.courseId)}</dd>
             </dl>
           </div>
-
         </div>
       </Modal >
     )
