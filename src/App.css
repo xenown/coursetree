@@ -51,6 +51,7 @@ li a:hover {
 }
 
 .course-node {
+	margin: 0.5rem;
 	width: 150px;
 	display: inline-block;
 }
@@ -82,4 +83,9 @@ li a:hover {
 
 .details-text {
 	text-align: center;
+}
+
+.expand-children {
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
 }

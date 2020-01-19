@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   handleCourseClick = (id) => {
+    console.log(id)
     this.setState({ isModalOpen: !this.state.isModalOpen, selectedCourseId: id });
   }
 
@@ -40,7 +41,7 @@ class App extends Component {
         <PrimaryButton>HI</PrimaryButton>
         <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen}
           toggleOpen={this.toggleOpen} />
-        <CourseOrgChart handleClick={this.handleCourseClick} />
+        <CourseOrgChart courseRoot="CS 241" handleClick={this.handleCourseClick} />
       </div >
     );
   }
