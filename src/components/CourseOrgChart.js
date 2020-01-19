@@ -7,11 +7,11 @@ import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 
 class CourseOrgChart extends Component {
+  nodeTotal = 0
   constructor(props) {
     super(props)
     this.state = {
       root: "",
-      nodeTotal: 0,
       courseTree: {},
       courseTreeCollapse: {},
     }
@@ -36,20 +36,20 @@ class CourseOrgChart extends Component {
         <div className="card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
           <div className="course-node-name">{node.code}</div>
           <div className="course-node-flag">
-            {node.offered.map((term, index) => {
-              switch (term) {
-                case "F":
-                  return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
-                case "W":
-                  return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
-                case "S":
-                  return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
-                default:
-                  break;
-              }
-              return <div/>
+            {
+              node.offered.map((term, index) => {
+                switch (term) {
+                  case "F":
+                    return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
+                  case "W":
+                    return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
+                  case "S":
+                    return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
+                  default:
+                    return null;
+                }
+              })
             }
-            )}
           </div>
         </div>
         <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.code)}> {node.name} </div>
@@ -60,36 +60,35 @@ class CourseOrgChart extends Component {
   };
 
   collapse(index, treeRoot, collapseRoot) {
-      console.log("Collapse")  
-      if (treeRoot.nodeIndex === index) {
-        if (collapseRoot.children.length !== 0) {
-          collapseRoot.children = []
-          console.log("Hide children")
-        } else {
-          let newChildren = JSON.parse(JSON.stringify(treeRoot.children))
-          for (let childCourse of newChildren) {
-            childCourse.children = []
-          }
-          collapseRoot.children = newChildren
-          console.log("Show children")
-        }
-        let tempObj = JSON.stringify(this.state.courseTreeCollapse)
-        this.setState({courseTreeCollapse: {}})
-        this.setState({courseTreeCollapse: JSON.parse(tempObj)})
+    if (treeRoot.nodeIndex === index) {
+      if (collapseRoot.children.length !== 0) {
+        collapseRoot.children = []
+        console.log("Hide children")
       } else {
-        if (collapseRoot && treeRoot) {
-          for (let child in treeRoot.children) {
-            this.collapse(index, treeRoot.children[child], collapseRoot.children[child])
-          }
+        let newChildren = JSON.parse(JSON.stringify(treeRoot.children))
+        for (let childCourse of newChildren) {
+          childCourse.children = []
+        }
+        collapseRoot.children = newChildren
+        console.log("Show children")
+      }
+      let tempObj = JSON.stringify(this.state.courseTreeCollapse)
+      this.setState({ courseTreeCollapse: {} })
+      this.setState({ courseTreeCollapse: JSON.parse(tempObj) })
+    } else {
+      if (collapseRoot && treeRoot) {
+        for (let child in treeRoot.children) {
+          this.collapse(index, treeRoot.children[child], collapseRoot.children[child])
         }
       }
+    }
   }
 
   buildTree(coursename) {
     // let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
     // let tempData = JSON.parse(JSON.stringify());
     let rootNode = JSON.parse(JSON.stringify(data[coursename]))
-    rootNode.nodeIndex = this.state.nodeTotal++
+    rootNode["nodeIndex"] = this.nodeTotal++
     if (rootNode) {
       for (let childCourse of rootNode.prereq) {
         let childTree = JSON.parse(JSON.stringify(this.buildTree(childCourse)))
@@ -106,11 +105,11 @@ class CourseOrgChart extends Component {
 
     this.state.nodeTotal = 0
     this.state.courseTree = this.buildTree(this.props.courseRoot)
-    this.state.courseTreeCollapse = JSON.parse(JSON.stringify(this.state.courseTree))   
+    this.state.courseTreeCollapse = JSON.parse(JSON.stringify(this.state.courseTree))
     for (let childCourse of this.state.courseTreeCollapse.children) {
       childCourse.children = []
     }
-    this.setState({root: this.props.courseRoot}) 
+    this.setState({ root: this.props.courseRoot })
   }
 
   render() {
@@ -124,7 +123,7 @@ class CourseOrgChart extends Component {
       </div>
 
     )
-  } 
+  }
 }
 
 export default CourseOrgChart
