@@ -1,12 +1,12 @@
 import React from 'react';
 
-import logo from './logo.svg';
 import './App.css';
-import SearchBar from './components/search'
+import CourseOrgChart from './components/CourseOrgChart'
 
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { initializeIcons } from '@uifabric/icons';
+
 initializeIcons();
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
           onChange={() => console.log('onChange called')}
         />
       <PrimaryButton>I am a button.</PrimaryButton>
+      <CourseOrgChart />
     </div>
   );
 }

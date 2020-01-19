@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.course-node {
+  width: 150px;
+  display: inline-block;
+}
+
+.course-node-title {
+  padding: 0.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.course-node-body {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.course-org-chart {
+  width: 50%;
+  margin-left: 10%;
+  margin-top: 5%
+}

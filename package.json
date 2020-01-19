@@ -6,9 +6,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
+    "d3": "^5.15.0",
     "office-ui-fabric-react": "^7.83.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-orgchart": "^1.0.5",
     "react-scripts": "3.3.0"
   },
   "scripts": {
@@ -31,5 +33,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "d3-org-chart": "^1.0.12"
   }
 }
