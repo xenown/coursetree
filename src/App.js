@@ -5,7 +5,7 @@ import CourseDetail from './components/CourseDetail'
 import CourseOrgChart from './components/CourseOrgChart'
 
 import { initializeIcons } from '@uifabric/icons';
-import { PrimaryButton } from 'office-ui-fabric-react';
+import { PrimaryButton, thProperties } from 'office-ui-fabric-react';
 
 initializeIcons();
 
@@ -15,6 +15,7 @@ class App extends Component {
 
     this.state = {
       isModalOpen: false,
+      treeBaseCourse: null,
       selectedCourseId: null,
     }
   }
@@ -24,24 +25,31 @@ class App extends Component {
     this.setState({ isModalOpen: !this.state.isModalOpen, selectedCourseId: id });
   }
 
+  getOpenState = () => {
+    return this.state.isModalOpen;
+  }
+
   toggleOpen = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
+  }
+
+  updateTreeBaseCourse = (course_id) => {
+    this.setState({
+      treeBaseCourse: course_id
+    })
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          CourseTree
-          <SearchBar />
+        <header className="App-header flex-container">
+          <div className="Title">CourseTree</div>
+          <SearchBar className="SearchBar" updateTreeBaseCourse={this.updateTreeBaseCourse}/>
         </header>
-        <PrimaryButton onClick={this.handleCourseClick}>12886</PrimaryButton>
-        <PrimaryButton>HI</PrimaryButton>
-        <PrimaryButton>HI</PrimaryButton>
-        <PrimaryButton>HI</PrimaryButton>
-        <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen}
-          toggleOpen={this.toggleOpen} />
-        <CourseOrgChart courseRoot="CS 241" handleClick={this.handleCourseClick} />
+        <div className="tree">
+          <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen} toggleOpen={this.toggleOpen} />
+          {this.state.treeBaseCourse == null ? <div/> : <CourseOrgChart courseRoot="CS 241" handleClick={this.handleCourseClick} />}
+        </div>
       </div >
     );
   }
