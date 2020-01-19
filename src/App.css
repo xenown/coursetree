@@ -78,11 +78,25 @@
 	padding-bottom: 0.2rem;
 }
 
+.schedule-button {
+	transform: rotate(-90deg);
+	position: fixed;
+	top: 50%;
+	right: 0;
+	z-index: 1;
+	left: calc(100% - 65px);
+	box-shadow: -2px -2px 4px lightgrey;
+}
+
 /* overwriting bootstrap styles */
-.main-78 {
+.ms-Dialog-main {
 	width: 65%;
 }
 
 .ms-Modal-scrollableContent {
 	overflow: hidden;
+}
+
+.ms-Panel-main {
+	width: 60%;
 }
