@@ -71,3 +71,8 @@ li a:hover {
   margin-left: 10%;
   margin-top: 5%
 }
+
+.expand-children {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}

@@ -45,7 +45,7 @@ class App extends Component {
         <PrimaryButton>HI</PrimaryButton>
         <PrimaryButton>HI</PrimaryButton>
         <CourseDetail courseId={this.state.selectedCourseId} isOpen={this.state.isModalOpen} toggleOpen={this.toggleOpen} />
-        <CourseOrgChart />
+        <CourseOrgChart courseRoot="CS 241"/>
       </div >
     );
   }

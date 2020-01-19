@@ -2,34 +2,37 @@ import React, {Component} from 'react'
 
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
-import CourseNode from './CourseNode'
-
-const courseTree = {
-  courseName: "Logic but with computers or Something",
-  courseCode: "SE-212",
-  children: [
-    {
-      courseName: "Foundations of Sequential Programs",
-      courseCode: "CS-241",
-      children: [
-        {
-          courseName: "Intro to Logic and Mathematics",
-          courseCode: "Math-135"
-        }
-      ]
-    },
-    {
-      courseName: "A Very Advanced CS course",
-      courseCode: "CS-341",
-    },
-  ]
-};
+import data from '../CS_res.json'
 
 class CourseOrgChart extends Component {
-    render () {
+    CourseNode = ({node}) => {
+      return (
+        <div className="card course-node">
+          <div class="card-header card-header course-node-title"> {node.code} </div>
+          <div class="card-body course-node-body"> {node.name} </div>
+          <div class="expand-children card-footer" onClick = {() => this.buildTree(node.code)} > Prereqs ({node.prereq.length}) </div>
+        </div>
+      )
+    }
+    buildTree(coursename) {
+      console.log("Building Tree")
+      let tempData = data.filter(course => course.code == coursename)
+      let rootNode = tempData[0];
+      if (rootNode && rootNode.children.length == 0) {
+        for (let childCourse of rootNode.prereq) {
+          let childTree = this.buildTree(childCourse)
+          if (childTree) {
+            rootNode.children.push(childTree)
+          } 
+        }
+      }
+      return rootNode
+    }
+    render () {      
+      let courseTree = this.buildTree(this.props.courseRoot)
       return (
           <div class="course-org-chart card">
-              <OrgChart tree={courseTree} NodeComponent={CourseNode} />
+              <OrgChart tree={courseTree} NodeComponent={this.CourseNode}/>
           </div>
           
       )      
