@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
-import CourseNode from './CourseNode'
 
 const courseTree = {
   courseName: "Logic but with computers or Something",

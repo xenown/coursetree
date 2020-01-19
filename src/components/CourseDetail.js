@@ -53,8 +53,6 @@ const cardContainerStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   alignContent: 'center',
-  border: 'black',
-  borderStyle: 'solid',
   padding: '5px 10px',
 }
 
