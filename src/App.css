@@ -28,7 +28,7 @@
 .tree {
 	text-align: center;
 	z-index: 0;
-	height: 100%;
+	height: calc(100% - 52px);
 }
 
 .ScheduleRow {

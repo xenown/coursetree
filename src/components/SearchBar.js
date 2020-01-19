@@ -83,7 +83,6 @@ class SearchBar extends Component {
     });
   }
   filter = (e) => {
-    console.log(e.target.value);
     let t = e.target.value;
     this.setState({
       searchText: t,
@@ -92,12 +91,10 @@ class SearchBar extends Component {
   }
 
   onClickCell = (e) => {
-    console.log("click cell");
     this.props.updateTreeBaseCourse(e.target.id);
   }
 
   unFocus = (e) => {
-    console.log("unFocus");
     this.setState({
       searchResults: []
     });

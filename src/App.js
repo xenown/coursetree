@@ -48,7 +48,6 @@ class App extends Component {
   }
 
   handleCourseClick = (code) => {
-    console.log(code)
     this.setState({ isCourseOpen: !this.state.isCourseOpen, selectedCourseCode: code });
   }
 
@@ -98,7 +97,6 @@ class App extends Component {
           return
       }
       for (let i = 0; i < Object.keys(this.state.coursesChosen).length; i += 3) {
-        console.log(parseInt(i) + parseInt(indexOffset))
         let index = parseInt(i) + parseInt(indexOffset) + 1;
         if (this.state.coursesChosen[index.toString()].length <= 5) {
           let bigTemp = this.state.coursesChosen;
@@ -139,7 +137,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.filter)
     return (
       <div className="App">
         <header className="App-header">

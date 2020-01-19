@@ -72,14 +72,12 @@ class CourseOrgChart extends Component {
     if (treeRoot.nodeIndex === index) {
       if (collapseRoot.children.length !== 0) {
         collapseRoot.children = []
-        console.log("Hide children")
       } else {
         let newChildren = JSON.parse(JSON.stringify(treeRoot.children))
         for (let childCourse of newChildren) {
           childCourse.children = []
         }
         collapseRoot.children = newChildren
-        console.log("Show children")
       }
       let tempObj = JSON.stringify(this.state.courseTreeCollapse)
       this.setState({ courseTreeCollapse: {} })
@@ -113,9 +111,6 @@ class CourseOrgChart extends Component {
   }
 
   buildFutureTree(coursename) {
-    // let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
-    // let tempData = JSON.parse(JSON.stringify());
-    console.log("future")
     let rootNode = JSON.parse(JSON.stringify(data[coursename]))
     rootNode["nodeIndex"] = this.nodeTotal++
     rootNode["difficulty"] = this.getFilter("difficulty", coursename)
@@ -141,8 +136,6 @@ class CourseOrgChart extends Component {
   }
 
   init() {
-    console.log("Initialize")
-
     this.state.nodeTotal = 0
     this.state.courseTree = this.props.isFuture ?
       this.buildFutureTree(this.props.courseRoot) :
@@ -158,9 +151,6 @@ class CourseOrgChart extends Component {
   }
 
   render() {
-    console.log("Rendering")
-    console.log(this.props.filter)
-    //console.log(this.state.root + " " + this.props.rootNode)
     if (this.state.root !== this.props.courseRoot || this.state.isFuture !== this.props.isFuture) { this.init() }
 
     return (
