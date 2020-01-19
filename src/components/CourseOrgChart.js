@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 
-import data from '../CS_res.json'
+import data from '../res.json'
+import data2 from '../CS_res.json'
 import OrgChart from 'react-orgchart';
 import 'react-orgchart/index.css';
 import { FontIcon } from 'office-ui-fabric-react/lib/Icon';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 
 class CourseOrgChart extends Component {
+  nodeTotal = 0
   constructor(props) {
     super(props)
     this.state = {
       root: "",
-      nodeTotal: 0,
       courseTree: {},
       courseTreeCollapse: {},
     }
@@ -31,24 +32,29 @@ class CourseOrgChart extends Component {
   });
 
   CourseNode = ({ node }) => {
+    console.log(node["difficulty"])
     return (
       <div className="card course-node" style={{"box-shadow": "0px 0px 10px " + this.getColor(node[this.props.filter])}}>
-        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.id)}>
-          <div className="course-node-name">{node.code}</div>
-          <div className="course-node-flag">
-            {node.offered.map((term) => {
-              switch (term) {
-                case "F":
-                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
-                case "W":
-                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
-                case "S":
-                  return <FontIcon iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
-              }
-            })}
+        <div className="card-header card-header course-node-title" onClick={() => this.props.handleClick(node.code)}>
+          <div className="course-node-name">{node.code}</div> {node.difficulty}
+          <div className="course-node-flag"> 
+            {
+              node.offered.map((term, index) => {
+                switch (term) {
+                  case "F":
+                    return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.red} >F</FontIcon>
+                  case "W":
+                    return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.blue} >W</FontIcon>
+                  case "S":
+                    return <FontIcon key={index} iconName="SingleBookmarkSolid" className={this.classNames.green} >S</FontIcon>
+                  default:
+                    return null;
+                }
+              })
+            }
           </div>
         </div>
-        <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.id)}> {node.name} </div>
+        <div className="card-body course-node-body" onClick={() => this.props.handleClick(node.code)}> {node.name} </div>
         <div className="expand-children card-footer" onClick={() => this.collapse(node.nodeIndex, this.state.courseTree, this.state.courseTreeCollapse)} > Prereqs ({node.prereq.length}) </div>
       </div>
     );
@@ -61,35 +67,38 @@ class CourseOrgChart extends Component {
   }
 
   collapse(index, treeRoot, collapseRoot) {
-      console.log("Collapse")  
-      if (treeRoot.nodeIndex == index) {
-        if (collapseRoot.children.length != 0) {
-          collapseRoot.children = []
-          console.log("Hide children")
-        } else {
-          let newChildren = JSON.parse(JSON.stringify(treeRoot.children))
-          for (let childCourse of newChildren) {
-            childCourse.children = []
-          }
-          collapseRoot.children = newChildren
-          console.log("Show children")
-        }
-        let tempObj = JSON.stringify(this.state.courseTreeCollapse)
-        this.setState({courseTreeCollapse: {}})
-        this.setState({courseTreeCollapse: JSON.parse(tempObj)})
+    if (treeRoot.nodeIndex === index) {
+      if (collapseRoot.children.length !== 0) {
+        collapseRoot.children = []
+        console.log("Hide children")
       } else {
-        if (collapseRoot && treeRoot) {
-          for (let child in treeRoot.children) {
-            this.collapse(index, treeRoot.children[child], collapseRoot.children[child])
-          }
+        let newChildren = JSON.parse(JSON.stringify(treeRoot.children))
+        for (let childCourse of newChildren) {
+          childCourse.children = []
+        }
+        collapseRoot.children = newChildren
+        console.log("Show children")
+      }
+      let tempObj = JSON.stringify(this.state.courseTreeCollapse)
+      this.setState({ courseTreeCollapse: {} })
+      this.setState({ courseTreeCollapse: JSON.parse(tempObj) })
+    } else {
+      if (collapseRoot && treeRoot) {
+        for (let child in treeRoot.children) {
+          this.collapse(index, treeRoot.children[child], collapseRoot.children[child])
         }
       }
+    }
   }
 
   buildTree(coursename) {
-    let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
-    let rootNode = JSON.parse(JSON.stringify(tempData[0]))
-    rootNode.nodeIndex = this.state.nodeTotal++
+    // let tempData = JSON.parse(JSON.stringify(data.filter(course => course.code === coursename)))
+    // let tempData = JSON.parse(JSON.stringify());
+    let rootNode = JSON.parse(JSON.stringify(data[coursename]))
+    rootNode["nodeIndex"] = this.nodeTotal++
+    rootNode["difficulty"] = this.getFilter("difficulty", coursename)
+    rootNode["useful"] = this.getFilter("useful", coursename)
+    rootNode["enjoyment"] = this.getFilter("enjoyment", coursename)
     if (rootNode) {
       for (let childCourse of rootNode.prereq) {
         let childTree = JSON.parse(JSON.stringify(this.buildTree(childCourse)))
@@ -101,22 +110,31 @@ class CourseOrgChart extends Component {
     return rootNode
   }
 
+  getFilter = (filter, code) => {
+    for (let item in data2) {
+      if (data2[item]["code"] === code) {
+        return data2[item][filter]
+      }
+    }
+  }
+
   init() {
     console.log("Initialize")
 
     this.state.nodeTotal = 0
     this.state.courseTree = this.buildTree(this.props.courseRoot)
-    this.state.courseTreeCollapse = JSON.parse(JSON.stringify(this.state.courseTree))   
+    this.state.courseTreeCollapse = JSON.parse(JSON.stringify(this.state.courseTree))
     for (let childCourse of this.state.courseTreeCollapse.children) {
       childCourse.children = []
     }
-    this.setState({root: this.props.courseRoot}) 
+    this.setState({ root: this.props.courseRoot })
   }
 
   render() {
     console.log("Rendering")
+    console.log(this.props.filter)
     //console.log(this.state.root + " " + this.props.rootNode)
-    if (this.state.root != this.props.courseRoot) { this.init() }
+    if (this.state.root !== this.props.courseRoot) { this.init() }
 
     return (
       <div className="course-org-chart card">
@@ -124,7 +142,7 @@ class CourseOrgChart extends Component {
       </div>
 
     )
-  } 
+  }
 }
 
 export default CourseOrgChart

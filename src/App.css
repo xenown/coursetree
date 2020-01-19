@@ -24,6 +24,30 @@
 	z-index: 0;
 }
 
+.ScheduleRow {
+	vertical-align: bottom;
+	height: 50px;
+}
+
+.CourseLabel{
+	display: inline-block;
+	z-index: 0;
+}
+
+.schedule-details-column {
+	padding-right: 0px;
+	padding-left: 0px;
+	border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.schedule-course-node-title {
+	padding: 0.4rem;
+	font-weight: bold;
+	text-align: left;
+	padding-left: 0.5rem;
+	margin-left: 15px;
+}
+
 .course-node {
 	margin: 0.5rem;
 	width: 150px;
