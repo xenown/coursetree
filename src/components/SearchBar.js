@@ -104,9 +104,9 @@ class SearchBar extends Component {
 
   renderCell = (item, index) => {
     return (
-      <div className={this.classNames.itemCell} onMouseDown={this.onClickCell} data-is-focusable={true}>
+      <div id={item.code} className={this.classNames.itemCell} onMouseDown={this.onClickCell} data-is-focusable={true}>
         {/* <Image className={classNames.itemImage} src={item.thumbnail} width={50} height={50} imageFit={ImageFit.cover} /> */}
-        <div className={this.classNames.itemContent}>
+        <div id={item.code} className={this.classNames.itemContent}>
           <div id={item.code} className={this.classNames.itemName}>{item.code + " " + item.name}</div>
           {/* {item.note === "" ? <div /> : <div className={this.classNames.itemNote}>{item.note}</div>} */}
           {/* <div className={this.classNames.itemDescription}>{item.description}</div> */}
